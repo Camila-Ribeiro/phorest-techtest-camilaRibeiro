@@ -8,7 +8,7 @@
   - [**Bonus Points**](#bonus-points)
 3. [**Connecting to our API**](#connecting-to-our-api)
 
-## Problem description
+## Problem Description
 Phorest has a platform for our customers to build their own applications on.
 
 You are tasked with building an interface to our platform. UI (web or app) or CLI application.
