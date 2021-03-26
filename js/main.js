@@ -1,5 +1,8 @@
 let searchBtn = document.getElementById("search_btn");
 let searchInputError = document.getElementById("search_input_error");
+let url = `https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?`;
+let username = "global/cloud@apiexamples.com";
+let password = "VMlRo/eh+Xd8M~l";
 
 searchBtn.addEventListener ('click', () => {
     searchInputError.classList.add("d-none")
@@ -9,10 +12,10 @@ searchBtn.addEventListener ('click', () => {
     checkIfEmpty(searchInput);
 
     if (validateEmail(searchInput)) {
-        console.log("IF")
+        getAllData(url + 'email=' + searchInput)
     }
-    else if(validatePhone(searchInput)) {
-        console.log("ELSE IF")
+    else if(validatePhone(searchInput)) { 
+        getAllData(url + 'phone=' + searchInput)
     } else {
         searchInputError.classList.remove("d-none");
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
@@ -28,10 +31,11 @@ function validateEmail(email) {
 
 //VALIDATE PHONE NUMBER ON INPUT
 function validatePhone(field) {
-    if (field.match(/^\d{15}/)) {
+    if (field.match(/^\d/)) {
         return true;
+    }else{
+        return false;
     } 
-    return false;
 }
 
 //CHECK IF INPUT IS BLANK
@@ -40,4 +44,21 @@ let checkIfEmpty = (text) => {
         searchInputError.classList.remove("d-none");
     } 
 }
-
+    
+// SEND REQUEST
+function getAllData(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+    // xhr.withCredentials = true;
+    xhr.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            const getAllClients = this.response;
+            populateClients(getAllClients);
+        } 
+    };
+    xhr.onerror = function() {
+        alert("Woops, there was an error making the request."); 
+    };
+    xhr.send();
+}
