@@ -1,4 +1,18 @@
+footer {
+    background-color: #563171;
+    color: #fff;
+    height: 30px;
+    margin: 5px 0;
+    padding: 5px;
+}
+
 .logo, img {
     margin:  0 auto;
     display: block;
+}
+
+.search-btn {
+    color: #212529;
+    background-color: #c3afd0;
+    border-color: #c3afd0;
 }
