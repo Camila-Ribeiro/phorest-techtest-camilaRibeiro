@@ -26,6 +26,14 @@ searchBtn.addEventListener ('click', () => {
     
 })
 
+// ADD KeyboardEvent.code TO TRIGGER A BUTTON CLICK ON ENTER KEY
+document.getElementById("search_input")
+    .addEventListener("keyup", function(e) {
+        if (e.code === 'Enter') {
+            document.getElementById("search_btn").click();
+    }
+});
+
 //VALIDATE E-MAIL ON INPUT
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
