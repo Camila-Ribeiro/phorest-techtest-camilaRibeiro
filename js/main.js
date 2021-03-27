@@ -13,12 +13,15 @@ searchBtn.addEventListener ('click', () => {
 
     if (validateEmail(searchInput)) {
         getAllData(url + 'email=' + searchInput)
+        display_clients.classList.add("d-none");
     }
     else if(validatePhone(searchInput)) { 
         getAllData(url + 'phone=' + searchInput)
+        display_clients.classList.add("d-none");
     } else {
         searchInputError.classList.remove("d-none");
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
+        display_clients.classList.add("d-none");
     }
     
 })
@@ -44,7 +47,41 @@ let checkIfEmpty = (text) => {
         searchInputError.classList.remove("d-none");
     } 
 }
+
+//GET LIST OF CLIENTS
+const populateClients = (resp) => {
+    let arr = JSON.parse(resp)
+
+    if(arr._embedded === undefined){
+        searchInputError.classList.remove("d-none");
+        setTimeout(() => searchInputError.classList.add("d-none"), 4000);
+    }else{
+        display_clients.classList.remove("d-none");
+
+        let clientsList = arr._embedded.clients;
+        clientsList.forEach(db => {
+            
+            let clientFirstName = document.getElementById("first_name");
+            let clientLasttName = document.getElementById("last_name");
+            let clientPhoneNumber = document.getElementById("mobile");
+            let clientEmail = document.getElementById("email");
+            
+            if(typeof db.mobile === "undefined"){
+                document.getElementById("mobile").innerHTML = "N/A";
+            }else{
+                clientPhoneNumber.innerHTML = `${db.mobile}`; 
+            }
+            
+            // DISPLAY THE DB IN THE HTML
+            clientFirstName.innerHTML = `${db.firstName}`;
+            clientLasttName.innerHTML = `${db.lastName}`;
+            clientEmail.innerHTML = `${db.email}`;
+            
+        });
+    }
     
+}
+
 // SEND REQUEST
 function getAllData(url) {
     var xhr = new XMLHttpRequest();
