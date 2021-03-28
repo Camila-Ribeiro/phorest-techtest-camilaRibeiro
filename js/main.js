@@ -44,8 +44,8 @@ addVoucher.addEventListener('click', () => {
 });
 
 //CREATE VOUCHER
-let createVoucher = document.getElementById("create_voucher");
-createVoucher.addEventListener('click', () => {
+let btnCreateVoucher = document.getElementById("create_voucher");
+btnCreateVoucher.addEventListener('click', () => {
     let retrieveClientId = clientId.value;
     let retrieveBranchId = branchId.value;
     let voucherInput = document.getElementById("voucher_input").value;
@@ -60,6 +60,17 @@ createVoucher.addEventListener('click', () => {
     })
     createVoucher(body);
 });
+
+// DISPLAY MESSAGE SUCCESS
+function messageSuccess() {
+    let messageSuccess = document.getElementById("message_success");
+    let clientsContainer = document.getElementById("display_clients");
+    let voucherContainer = document.getElementById("voucher_form");
+    messageSuccess.classList.remove("d-none");
+    clientsContainer.remove();
+    voucherContainer.remove();
+    setTimeout(() => location.reload(), 5000);
+}
 
 //VALIDATE E-MAIL ON INPUT
 function validateEmail(email) {
@@ -143,6 +154,7 @@ function createVoucher(data){
     xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
     xhr.onload = function () {
             console.log(this.responseText)
+            messageSuccess();
     };
     xhr.onerror = function() {
         alert("Woops, there was an error making the request."); 
