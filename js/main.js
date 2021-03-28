@@ -58,17 +58,7 @@ createVoucher.addEventListener('click', () => {
         expiryDate : moment().add(1, 'years'),
         originalBalance : getDecimalValue
     })
-    
-    fetch('https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + btoa(username + ":" + password)
-        },
-        body: body
-    }).then(res => res.json())
-      
+    createVoucher(body);
 });
 
 //VALIDATE E-MAIL ON INPUT
@@ -127,7 +117,7 @@ const populateClients = (resp) => {
     }  
 }
 
-// SEND REQUEST // GET API
+// SEND REQUEST // GET CLIENTS API
 function getAllData(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -142,4 +132,20 @@ function getAllData(url) {
         alert("Woops, there was an error making the request."); 
     };
     xhr.send();
+}
+
+// POST REQUEST
+function createVoucher(data){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', true);
+    xhr.setRequestHeader("Accept", "application/json, text/plain, */*");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
+    xhr.onload = function () {
+            console.log(this.responseText)
+    };
+    xhr.onerror = function() {
+        alert("Woops, there was an error making the request."); 
+    };
+    xhr.send(data);
 }
