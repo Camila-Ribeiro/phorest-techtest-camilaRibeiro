@@ -5,29 +5,29 @@ let username = "global/cloud@apiexamples.com";
 let password = "VMlRo/eh+Xd8M~l";
 let clientId = document.getElementById("client_id");
 let branchId = document.getElementById("branch_id");
+let displayClients = document.getElementById("display_clients");
 
 
 searchBtn.addEventListener ('click', () => {
-    searchInputError.classList.add("d-none")
+    searchInputError.classList.add("d-none");
     let searchInput = document.getElementById("search_input").value;
 
     //check if input is empty
     checkIfEmpty(searchInput);
 
     if (validateEmail(searchInput)) {
-        getAllData(url + 'email=' + searchInput)
-        display_clients.classList.add("d-none");
+        getAllData(url + 'email=' + searchInput);
+        displayClients.classList.add("d-none");
     }
     else if(validatePhone(searchInput)) { 
-        getAllData(url + 'phone=' + searchInput)
-        display_clients.classList.add("d-none");
+        getAllData(url + 'phone=' + searchInput);
+        displayClients.classList.add("d-none");
     } else {
         searchInputError.classList.remove("d-none");
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
-        display_clients.classList.add("d-none");
+        displayClients.classList.add("d-none");
     }
-    
-})
+});
 
 //ADD KeyboardEvent.code TO TRIGGER A BUTTON CLICK ON ENTER KEY
 let getEnterKey = document.getElementById("search_input");
@@ -39,8 +39,9 @@ getEnterKey.addEventListener("keyup", (e) => {
 
 //ADD VOUCHER
 let addVoucher = document.getElementById("add_voucher");
+let voucherForm = document.getElementById("voucher_form");
 addVoucher.addEventListener('click', () => {
-    voucher_form.classList.remove("d-none");
+    voucherForm.classList.remove("d-none");
 });
 
 //CREATE VOUCHER
@@ -57,7 +58,7 @@ btnCreateVoucher.addEventListener('click', () => {
         issueDate : moment(),
         expiryDate : moment().add(1, 'years'),
         originalBalance : getDecimalValue
-    })
+    });
     createVoucher(body);
 });
 
@@ -92,17 +93,17 @@ let checkIfEmpty = (text) => {
     if(text == "" || text == null ){
         searchInputError.classList.remove("d-none");
     } 
-}
+};
 
 //GET LIST OF CLIENTS
 const populateClients = (resp) => {
-    let arr = JSON.parse(resp)
+    let arr = JSON.parse(resp);
 
     if(arr._embedded === undefined){
         searchInputError.classList.remove("d-none");
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
     }else{
-        display_clients.classList.remove("d-none");
+        displayClients.classList.remove("d-none");
 
         let clientsList = arr._embedded.clients;
         clientsList.forEach(db => {
@@ -116,19 +117,18 @@ const populateClients = (resp) => {
             }else{
                 clientPhoneNumber.innerHTML = `${db.mobile}`; 
             }
-            
+    
             // DISPLAY THE DB IN THE HTML
             clientId.value = `${db.clientId}`;
             branchId.value = `${db.creatingBranchId}`;
             clientFirstName.innerHTML = `${db.firstName}`;
             clientLasttName.innerHTML = `${db.lastName}`;
             clientEmail.innerHTML = `${db.email}`;
-            
         });
     }  
-}
+};
 
-// SEND REQUEST // GET CLIENTS API
+// SEND REQUEST //GET CLIENTS API
 function getAllData(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -145,7 +145,7 @@ function getAllData(url) {
     xhr.send();
 }
 
-// POST REQUEST
+// POST REQUEST //GET VOUCHER API
 function createVoucher(data){
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', true);
@@ -153,7 +153,7 @@ function createVoucher(data){
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
     xhr.onload = function () {
-            console.log(this.responseText)
+            console.log(this.responseText);
             messageSuccess();
     };
     xhr.onerror = function() {

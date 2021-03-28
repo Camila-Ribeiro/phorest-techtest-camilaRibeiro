@@ -1,9 +1,53 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Montserrat", sans-serif;
+	font-weight: 400;
+}
+
+body {
+    font-family: 'Lora', serif;
+}
+
+th {
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+td {
+    font-size: 14px;
+}
+
 footer {
-    background-color: #563171;
+    background-color:#3c1472;
     color: #fff;
     height: 30px;
     margin: 5px 0;
     padding: 5px;
+}
+
+.btn-custom {
+    color: #fff;
+    background-color: #3c1472;
+    border-color: #3c1472;
+    font-size: 14px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.btn-custom:hover {
+    background-color: #c3afd0;
+    border-color: #c3afd0;
 }
 
 .logo, img {
@@ -11,8 +55,47 @@ footer {
     display: block;
 }
 
-.btn-custom {
-    color: #212529;
-    background-color: #c3afd0;
-    border-color: #c3afd0;
+/* ------------------------- Search Section  */
+.title{
+    font-size: 20px;
+    margin-top: 80px;
 }
+
+/* ------------------------- Display Clients List Section  */
+.clients-table {
+    margin: 80px 40px;
+}
+
+.th-voucher {
+    text-align: center;
+}
+
+/* ------------------------- Create Voucher Section  */
+.form-container {
+    border: 5px solid #c3afd0;
+    padding: 40px 20px;
+    margin-bottom: 80px;
+    border-radius: .25rem;
+}
+
+.voucher-body {
+    margin-left: 140px;
+}
+
+.voucher-img {
+    padding-top: 40px;
+    padding-left: 20px;
+}
+
+.voucher-img p {
+    font-size: 12px;
+    margin-top: 10px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+.m150 {
+    margin-bottom: 150px;
+}
+    
