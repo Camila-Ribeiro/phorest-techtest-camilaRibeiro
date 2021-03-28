@@ -28,7 +28,7 @@
                 <div class="input-group m-5 w-50 mx-auto">
                     <input id="search_input" type="text" class="form-control " placeholder="Search Clients" aria-label="search clients" aria-describedby="search_input">
                     <div class="input-group-append">
-                        <button id="search_btn" class="btn search-btn" type="button">Search</button>
+                        <button id="search_btn" class="btn btn-custom w-100" type="button">Search</button>
                     </div>
                 </div>
                 <div id="search_input_error" class="w-50 mx-auto alert alert-danger d-none">Please enter a valid phone number or e-mail address.
@@ -44,6 +44,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Voucher</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,27 +53,38 @@
                         <td id="last_name"></td>
                         <td id="mobile"></td>
                         <td id="email"></td>
+                        <td>
+                            <button class="btn btn-custom" id="add_voucher">Add Voucher</button>
+                        </td>
                     </tr>
-                    <tr>
-                        <td id="first_name"></td>
-                        <td id="last_name"></td>
-                        <td id="mobile"></td>
-                        <td id="email"></td>
-                    </tr>
+                    <input type="hidden" id="client_id" value="">
+                    <input type="hidden" id="branch_id" value="">
                     </tbody>
                 </table>
             </div>
         </section>
         <section>
-            <div class="input-group m-5 w-50 mx-auto d-none">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Amount (in euros)">
-                    <div class="input-group-append">
+            <form class="d-none mt-5 mb-5 " id="voucher_form">
+                <div class="form-group w-50 mx-auto">
+                    <label for="insert_amount">Voucher</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
                         <span class="input-group-text">€</span>
+                        </div>
+                        <input type="number" class="form-control" id="voucher_input" aria-label="Amount (to the nearest dollar)">
+                        <div class="input-group-append">
+                        <span class="input-group-text">.00</span>
+                        </div>
                     </div>
-                    <div id="message_success" class="invalid-feedback">Voucher was succellfully created!</div>
+                    <small id="#" class="form-text text-muted">Please insert the required amount</small>
                 </div>
-            </div>
+                <div class="w-50 mx-auto">
+                    <button type="button" class="btn btn-custom w-100" id="create_voucher">Create Voucher</button>
+                </div>
+                <div class="alert alert-success d-none" id="message_success" role="alert">
+                    Voucher was successfully created!
+                </div>
+            </form>
         </section>
         <footer class="fixed-bottom">
             <div class="text-center">
@@ -81,6 +93,7 @@
         </footer>
 
         <!-- JavaScript -->
+        <script src="js/moment.min.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

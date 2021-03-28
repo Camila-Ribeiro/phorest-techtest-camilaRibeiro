@@ -3,6 +3,9 @@ let searchInputError = document.getElementById("search_input_error");
 let url = `https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?`;
 let username = "global/cloud@apiexamples.com";
 let password = "VMlRo/eh+Xd8M~l";
+let clientId = document.getElementById("client_id");
+let branchId = document.getElementById("branch_id");
+
 
 searchBtn.addEventListener ('click', () => {
     searchInputError.classList.add("d-none")
@@ -26,12 +29,46 @@ searchBtn.addEventListener ('click', () => {
     
 })
 
-// ADD KeyboardEvent.code TO TRIGGER A BUTTON CLICK ON ENTER KEY
-document.getElementById("search_input")
-    .addEventListener("keyup", function(e) {
-        if (e.code === 'Enter') {
-            document.getElementById("search_btn").click();
+//ADD KeyboardEvent.code TO TRIGGER A BUTTON CLICK ON ENTER KEY
+let getEnterKey = document.getElementById("search_input");
+getEnterKey.addEventListener("keyup", (e) => {
+    if (e.code === 'Enter') {
+        document.getElementById("search_btn").click();
     }
+});
+
+//ADD VOUCHER
+let addVoucher = document.getElementById("add_voucher");
+addVoucher.addEventListener('click', () => {
+    voucher_form.classList.remove("d-none");
+});
+
+//CREATE VOUCHER
+let createVoucher = document.getElementById("create_voucher");
+createVoucher.addEventListener('click', () => {
+    let retrieveClientId = clientId.value;
+    let retrieveBranchId = branchId.value;
+    let voucherInput = document.getElementById("voucher_input").value;
+    let getDecimalValue = parseFloat(voucherInput).toFixed(2);
+    let body = 
+    JSON.stringify({
+        clientId: retrieveClientId,
+        creatingBranchId: retrieveBranchId,
+        issueDate : moment(),
+        expiryDate : moment().add(1, 'years'),
+        originalBalance : getDecimalValue
+    })
+    
+    fetch('https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + btoa(username + ":" + password)
+        },
+        body: body
+    }).then(res => res.json())
+      
 });
 
 //VALIDATE E-MAIL ON INPUT
@@ -68,7 +105,6 @@ const populateClients = (resp) => {
 
         let clientsList = arr._embedded.clients;
         clientsList.forEach(db => {
-            
             let clientFirstName = document.getElementById("first_name");
             let clientLasttName = document.getElementById("last_name");
             let clientPhoneNumber = document.getElementById("mobile");
@@ -81,21 +117,21 @@ const populateClients = (resp) => {
             }
             
             // DISPLAY THE DB IN THE HTML
+            clientId.value = `${db.clientId}`;
+            branchId.value = `${db.creatingBranchId}`;
             clientFirstName.innerHTML = `${db.firstName}`;
             clientLasttName.innerHTML = `${db.lastName}`;
             clientEmail.innerHTML = `${db.email}`;
             
         });
-    }
-    
+    }  
 }
 
-// SEND REQUEST
+// SEND REQUEST // GET API
 function getAllData(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
-    // xhr.withCredentials = true;
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const getAllClients = this.response;
