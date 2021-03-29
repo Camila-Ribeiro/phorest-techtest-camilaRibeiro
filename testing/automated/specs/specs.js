@@ -1,11 +1,5 @@
 describe("Phorest Web Application Test", () => {
 
-    // it("should be a number", () => {
-    //     expect("2019").toBe(2019);
-    // })
-
-    
-
     beforeEach(() => {
         setFixtures(`
         <div class="container">

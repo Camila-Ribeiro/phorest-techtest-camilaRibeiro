@@ -42,6 +42,7 @@ let addVoucher = document.getElementById("add_voucher");
 let voucherForm = document.getElementById("voucher_form");
 addVoucher.addEventListener('click', () => {
     voucherForm.classList.remove("d-none");
+    scrollDown();
 });
 
 //CREATE VOUCHER
@@ -161,3 +162,14 @@ function createVoucher(data){
     };
     xhr.send(data);
 }
+
+//SCROLL TO THE bottom OF THE PAGE
+const scrollDown = (h) => {
+    let i = h || 0;
+    if (i < 250) {
+        setTimeout(() => {
+        window.scrollTo(0, i);
+        scrollDown(i + 220);
+        }, 1);
+    }
+};
