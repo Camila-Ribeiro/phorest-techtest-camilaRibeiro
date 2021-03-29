@@ -55,13 +55,13 @@ footer {
     display: block;
 }
 
-/* ------------------------- Search Section  */
+/* ------------------------- Search */
 .title{
     font-size: 20px;
     margin-top: 80px;
 }
 
-/* ------------------------- Display Clients List Section  */
+/* ------------------------- Display Clients List */
 .clients-table {
     margin: 80px 40px;
 }
@@ -70,7 +70,7 @@ footer {
     text-align: center;
 }
 
-/* ------------------------- Create Voucher Section  */
+/* ------------------------- Create Voucher */
 .form-container {
     border: 5px solid #c3afd0;
     padding: 40px 20px;
@@ -96,6 +96,6 @@ footer {
 }
 
 .m150 {
-    margin-bottom: 150px;
+    margin-bottom: 80px;
 }
     
