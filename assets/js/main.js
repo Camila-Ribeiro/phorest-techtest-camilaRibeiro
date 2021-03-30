@@ -91,26 +91,20 @@ let checkIfEmpty = (text, el) => {
 };
 
 //VALIDATE E-MAIL ON INPUT
-function validateEmail(email) {
+let validateEmail = (email) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
 
 //VALIDATE PHONE NUMBER ON INPUT
-function validatePhone(field) {
-    if (field.match(/^\d/)) {
-        return true;
-    }else{
-        return false;
-    } 
-}
+let validatePhone = (field) => (field.match(/^\d/)) ? true : false
 
 //DISPLAY MESSAGE SUCCESS
-function messageSuccess() {
+let messageSuccess = () => {
     let messageSuccess = document.getElementById("message_success");
     let clientsContainer = document.getElementById("display_clients");
     let voucherContainer = document.getElementById("voucher_form");
-    getEnterKey.disabled = true;
+    searchInput.disabled = true;
     searchBtn.disabled = true;
     messageSuccess.classList.remove("d-none");
     clientsContainer.remove();
@@ -152,8 +146,8 @@ const populateClients = (resp) => {
 };
 
 //SEND REQUEST //GET CLIENTS API
-function getAllData(url) {
-    var xhr = new XMLHttpRequest();
+let getAllData = (url) => {
+    let xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
     xhr.onreadystatechange = function () {
@@ -169,8 +163,8 @@ function getAllData(url) {
 }
 
 //POST REQUEST //GET VOUCHER API
-function createVoucher(data){
-    var xhr = new XMLHttpRequest();
+let createVoucher = (data) => {
+    let xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', true);
     xhr.setRequestHeader("Accept", "application/json, text/plain, */*");
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -186,7 +180,7 @@ function createVoucher(data){
 }
 
 //SCROLL TO THE bottom OF THE PAGE
-const scrollDown = (h) => {
+let scrollDown = (h) => {
     let i = h || 0;
     if (i < 250) {
         setTimeout(() => {
