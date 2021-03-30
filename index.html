@@ -55,6 +55,8 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="add_voucher_error" class="w-75 mx-auto text-center alert alert-danger mt-5 d-none"><small>This voucher cannot be created!</small>
+                </div>
                 <input type="hidden" id="client_id" value="">
                 <input type="hidden" id="branch_id" value="">
             </div>
@@ -73,9 +75,6 @@
                             <span class="input-group-text">€</span>
                             </div>
                             <input type="number" class="form-control" id="voucher_input" aria-label="Amount (to the nearest dollar)">
-                            <div class="input-group-append">
-                            <span class="input-group-text">.00</span>
-                            </div>
                         </div>
                         <small class="form-text text-muted">Please insert the required amount</small>
                     </div>

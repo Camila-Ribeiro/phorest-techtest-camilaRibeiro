@@ -40,14 +40,20 @@ getEnterKey.addEventListener("keyup", (e) => {
 //ADD VOUCHER
 let addVoucher = document.getElementById("add_voucher");
 let voucherForm = document.getElementById("voucher_form");
+
 addVoucher.addEventListener('click', () => {
-    voucherForm.classList.remove("d-none");
+    let addVoucherError = document.getElementById("add_voucher_error");
+    if (branchId.value == "undefined") {
+        addVoucherError.classList.remove("d-none");
+        setTimeout(() => addVoucherError.classList.add("d-none"), 5000);
+    }
     scrollDown();
 });
 
 //CREATE VOUCHER
 let btnCreateVoucher = document.getElementById("create_voucher");
 btnCreateVoucher.addEventListener('click', () => {
+    
     let retrieveClientId = clientId.value;
     let retrieveBranchId = branchId.value;
     let voucherInput = document.getElementById("voucher_input").value;
@@ -65,13 +71,14 @@ btnCreateVoucher.addEventListener('click', () => {
 
 // DISPLAY MESSAGE SUCCESS
 function messageSuccess() {
+ 
     let messageSuccess = document.getElementById("message_success");
     let clientsContainer = document.getElementById("display_clients");
     let voucherContainer = document.getElementById("voucher_form");
     messageSuccess.classList.remove("d-none");
     clientsContainer.remove();
     voucherContainer.remove();
-    setTimeout(() => location.reload(), 5000);
+    // setTimeout(() => location.reload(), 5000);
 }
 
 //VALIDATE E-MAIL ON INPUT
