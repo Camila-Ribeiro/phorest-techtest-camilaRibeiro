@@ -33,7 +33,6 @@ footer {
     background-color:#3c1472;
     color: #fff;
     height: 30px;
-    margin: 5px 0;
     padding: 5px;
 }
 
@@ -98,4 +97,24 @@ footer {
 .m150 {
     margin-bottom: 80px;
 }
-    
+
+/* ------------------------- media queries */
+/*mobile devices*/
+@media (max-width: 734px) {
+    .voucher-img {
+        padding: unset;
+        float: none !important;
+    }
+   
+    .voucher-body {
+        margin-left: unset; 
+    }
+
+    .mobile-form {
+        width: 100% !important;
+    }
+
+    .mobile-btn {
+        width: 100% !important;
+    }
+}

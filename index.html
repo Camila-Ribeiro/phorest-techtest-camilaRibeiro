@@ -31,28 +31,30 @@
         </div>
         <div class="container-fluid">
             <div class="clients-table d-none" id="display_clients">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                        <th scope="col">Mobile</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" class="th-voucher">Voucher</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td id="first_name"></td>
-                        <td id="last_name"></td>
-                        <td id="mobile"></td>
-                        <td id="email"></td>
-                        <td class="text-center">
-                            <button class="btn btn-custom text-uppercase" id="add_voucher">Add Voucher</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive-sm">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Email</th>
+                            <th scope="col" class="th-voucher">Voucher</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td id="first_name"></td>
+                            <td id="last_name"></td>
+                            <td id="mobile"></td>
+                            <td id="email"></td>
+                            <td class="text-center">
+                                <button class="btn btn-custom text-uppercase" id="add_voucher">Add Voucher</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <input type="hidden" id="client_id" value="">
                 <input type="hidden" id="branch_id" value="">
             </div>
@@ -64,7 +66,7 @@
                     <p>Voucher</p>
                  </div>
                  <div class="voucher-body">
-                    <div class="form-group w-75">
+                    <div class="mobile-form form-group w-75">
                         <label for="voucher_input"></label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -77,13 +79,13 @@
                         </div>
                         <small class="form-text text-muted">Please insert the required amount</small>
                     </div>
-                    <div class="w-75">
+                    <div class="w-75 mobile-btn">
                         <button type="button" class="btn btn-custom w-100 text-uppercase" id="create_voucher">Create Voucher</button>
                     </div>
                  </div>
             </form>
         </div>
-        <div class="container mb-5 message-success">
+        <div class="container mb-5 d-none">
             <div class="w-75 mx-auto text-center alert alert-success" id="message_success" role="alert">
                 <img class="mb-3" src="assets/img/checked.svg" width="60" alt="Checked Icon">
                 Voucher was successfully created!
