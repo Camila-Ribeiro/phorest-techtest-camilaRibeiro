@@ -1,26 +1,42 @@
 let url = `https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?`;
 let username = "global/cloud@apiexamples.com";
 let password = "VMlRo/eh+Xd8M~l";
+
+//BTNS
 let searchBtn = document.getElementById("search_btn");
+let btnAddVoucher = document.getElementById("add_voucher");
+let btnCreateVoucher = document.getElementById("create_voucher");
+
+//INPUTS
+let searchInput = document.getElementById("search_input");
 let searchInputError = document.getElementById("search_input_error");
 let clientId = document.getElementById("client_id");
 let branchId = document.getElementById("branch_id");
+
 let displayClients = document.getElementById("display_clients");
+let voucherForm = document.getElementById("voucher_form");
 
+//ADD KeyboardEvent.code TO TRIGGER SEARCH BUTTON CLICK ON ENTER KEY
+searchInput.addEventListener("keyup", (e) => {
+    if (e.code === 'Enter') {
+        document.getElementById("search_btn").click();
+    }
+});
 
+//SEARCH BUTTON
 searchBtn.addEventListener ('click', () => {
     searchInputError.classList.add("d-none");
-    let searchInput = document.getElementById("search_input").value;
+    let searchInputVal = searchInput.value;
 
     //check if input is empty
-    checkIfEmpty(searchInput, searchInputError);
+    checkIfEmpty(searchInputVal, searchInputError);
 
-    if (validateEmail(searchInput)) {
-        getAllData(url + 'email=' + searchInput);
+    if (validateEmail(searchInputVal)) {
+        getAllData(url + 'email=' + searchInputVal);
         displayClients.classList.add("d-none");
     }
-    else if(validatePhone(searchInput)) { 
-        getAllData(url + 'phone=' + searchInput);
+    else if(validatePhone(searchInputVal)) { 
+        getAllData(url + 'phone=' + searchInputVal);
         displayClients.classList.add("d-none");
     } else {
         searchInputError.classList.remove("d-none");
@@ -29,19 +45,8 @@ searchBtn.addEventListener ('click', () => {
     }
 });
 
-//ADD KeyboardEvent.code TO TRIGGER A BUTTON CLICK ON ENTER KEY
-let getEnterKey = document.getElementById("search_input");
-getEnterKey.addEventListener("keyup", (e) => {
-    if (e.code === 'Enter') {
-        document.getElementById("search_btn").click();
-    }
-});
-
-//ADD VOUCHER
-let addVoucher = document.getElementById("add_voucher");
-let voucherForm = document.getElementById("voucher_form");
-
-addVoucher.addEventListener('click', () => {
+//ADD VOUCHER BUTTON
+btnAddVoucher.addEventListener('click', () => {
     let addVoucherError = document.getElementById("add_voucher_error");
     if (branchId.value == "undefined") {
         addVoucherError.classList.remove("d-none");
@@ -52,8 +57,7 @@ addVoucher.addEventListener('click', () => {
     }
 });
 
-//CREATE VOUCHER
-let btnCreateVoucher = document.getElementById("create_voucher");
+//CREATE VOUCHER BUTTON
 btnCreateVoucher.addEventListener('click', () => {
     let voucherInput = document.getElementById("voucher_input").value;
     let voucherInputError = document.getElementById("voucher_input_error");
@@ -101,7 +105,7 @@ function validatePhone(field) {
     } 
 }
 
-// DISPLAY MESSAGE SUCCESS
+//DISPLAY MESSAGE SUCCESS
 function messageSuccess() {
     let messageSuccess = document.getElementById("message_success");
     let clientsContainer = document.getElementById("display_clients");
@@ -136,8 +140,8 @@ const populateClients = (resp) => {
             }else{
                 clientPhoneNumber.innerHTML = `${db.mobile}`; 
             }
-    
-            // DISPLAY THE DB IN THE HTML
+
+            //DISPLAY THE DB IN THE HTML
             clientId.value = `${db.clientId}`;
             branchId.value = `${db.creatingBranchId}`;
             clientFirstName.innerHTML = `${db.firstName}`;
@@ -147,7 +151,7 @@ const populateClients = (resp) => {
     }  
 };
 
-// SEND REQUEST //GET CLIENTS API
+//SEND REQUEST //GET CLIENTS API
 function getAllData(url) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
@@ -164,7 +168,7 @@ function getAllData(url) {
     xhr.send();
 }
 
-// POST REQUEST //GET VOUCHER API
+//POST REQUEST //GET VOUCHER API
 function createVoucher(data){
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/voucher', true);
