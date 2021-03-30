@@ -1,8 +1,8 @@
-let searchBtn = document.getElementById("search_btn");
-let searchInputError = document.getElementById("search_input_error");
 let url = `https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?`;
 let username = "global/cloud@apiexamples.com";
 let password = "VMlRo/eh+Xd8M~l";
+let searchBtn = document.getElementById("search_btn");
+let searchInputError = document.getElementById("search_input_error");
 let clientId = document.getElementById("client_id");
 let branchId = document.getElementById("branch_id");
 let displayClients = document.getElementById("display_clients");
@@ -13,7 +13,7 @@ searchBtn.addEventListener ('click', () => {
     let searchInput = document.getElementById("search_input").value;
 
     //check if input is empty
-    checkIfEmpty(searchInput);
+    checkIfEmpty(searchInput, searchInputError);
 
     if (validateEmail(searchInput)) {
         getAllData(url + 'email=' + searchInput);
@@ -46,40 +46,45 @@ addVoucher.addEventListener('click', () => {
     if (branchId.value == "undefined") {
         addVoucherError.classList.remove("d-none");
         setTimeout(() => addVoucherError.classList.add("d-none"), 5000);
+    }else{
+        voucherForm.classList.remove("d-none");
+        scrollDown();
     }
-    scrollDown();
 });
 
 //CREATE VOUCHER
 let btnCreateVoucher = document.getElementById("create_voucher");
 btnCreateVoucher.addEventListener('click', () => {
-    
-    let retrieveClientId = clientId.value;
-    let retrieveBranchId = branchId.value;
     let voucherInput = document.getElementById("voucher_input").value;
-    let getDecimalValue = parseFloat(voucherInput).toFixed(2);
-    let body = 
-    JSON.stringify({
-        clientId: retrieveClientId,
-        creatingBranchId: retrieveBranchId,
-        issueDate : moment(),
-        expiryDate : moment().add(1, 'years'),
-        originalBalance : getDecimalValue
-    });
-    createVoucher(body);
+    let voucherInputError = document.getElementById("voucher_input_error");
+
+    if(checkIfEmpty(voucherInput, voucherInputError)){
+        setTimeout(() => voucherInputError.classList.add("d-none") , 5000);
+    }else {
+        let retrieveClientId = clientId.value;
+        let retrieveBranchId = branchId.value;
+        let getDecimalValue = parseFloat(voucherInput).toFixed(2);
+        let body = 
+        JSON.stringify({
+            clientId: retrieveClientId,
+            creatingBranchId: retrieveBranchId,
+            issueDate : moment(),
+            expiryDate : moment().add(1, 'years'),
+            originalBalance : getDecimalValue
+        });
+        createVoucher(body);
+    }
 });
 
-// DISPLAY MESSAGE SUCCESS
-function messageSuccess() {
- 
-    let messageSuccess = document.getElementById("message_success");
-    let clientsContainer = document.getElementById("display_clients");
-    let voucherContainer = document.getElementById("voucher_form");
-    messageSuccess.classList.remove("d-none");
-    clientsContainer.remove();
-    voucherContainer.remove();
-    // setTimeout(() => location.reload(), 5000);
-}
+//CHECK IF INPUT IS BLANK
+let checkIfEmpty = (text, el) => {
+    if(text == "" || text == null ){
+        el.classList.remove("d-none");
+        return true;
+    }else{
+        return false;
+    } 
+};
 
 //VALIDATE E-MAIL ON INPUT
 function validateEmail(email) {
@@ -96,12 +101,18 @@ function validatePhone(field) {
     } 
 }
 
-//CHECK IF INPUT IS BLANK
-let checkIfEmpty = (text) => {
-    if(text == "" || text == null ){
-        searchInputError.classList.remove("d-none");
-    } 
-};
+// DISPLAY MESSAGE SUCCESS
+function messageSuccess() {
+    let messageSuccess = document.getElementById("message_success");
+    let clientsContainer = document.getElementById("display_clients");
+    let voucherContainer = document.getElementById("voucher_form");
+    getEnterKey.disabled = true;
+    searchBtn.disabled = true;
+    messageSuccess.classList.remove("d-none");
+    clientsContainer.remove();
+    voucherContainer.remove();
+    setTimeout(() => location.reload(), 6000);
+}
 
 //GET LIST OF CLIENTS
 const populateClients = (resp) => {
@@ -161,8 +172,8 @@ function createVoucher(data){
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", "Basic " + btoa(username + ":" + password));
     xhr.onload = function () {
-            console.log(this.responseText);
-            messageSuccess();
+        console.log(this.responseText);
+        messageSuccess();
     };
     xhr.onerror = function() {
         alert("Woops, there was an error making the request."); 

@@ -74,18 +74,18 @@
                             <div class="input-group-prepend">
                             <span class="input-group-text">€</span>
                             </div>
-                            <input type="number" class="form-control" id="voucher_input" aria-label="Amount (to the nearest dollar)">
+                            <input type="number" class="form-control" id="voucher_input" aria-label="Amount">
                         </div>
-                        <small class="form-text text-muted">Please insert the required amount</small>
                     </div>
+                    <p id="voucher_input_error" class="text-danger d-none">Please insert the required amount</p>
                     <div class="w-75 mobile-btn">
                         <button type="button" class="btn btn-custom w-100 text-uppercase" id="create_voucher">Create Voucher</button>
                     </div>
                  </div>
             </form>
         </div>
-        <div class="container mb-5 d-none">
-            <div class="w-75 mx-auto text-center alert alert-success" id="message_success" role="alert">
+        <div id="message_success" class="container mb-5 d-none">
+            <div class="w-75 mx-auto text-center alert alert-success" role="alert">
                 <img class="mb-3" src="assets/img/checked.svg" width="60" alt="Checked Icon">
                 Voucher was successfully created!
             </div>
