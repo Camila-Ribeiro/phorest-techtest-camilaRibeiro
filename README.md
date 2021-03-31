@@ -14,7 +14,7 @@
 5. [**Deployment**](#deployment)
     - [**Local Deployment**](#local-deployment)
     - [**Remote Deployment**](#remote-deployment)
-6. [**Enviroment Variables**](#environment-variable)
+6. [**Environment Variables**](#environment-variables)
    
 
 ## Problem Description
@@ -193,15 +193,19 @@ Steps to set up environmets:
 2. Add `<script src="assets/js/config.js"></script>` on index.html,
 3. Add `config.js` file to `.gitignore` file using path `assets/js/config.js`,
 4. On `config.js` file add desired variables as per example below:
-    `var env = {
+    ```
+    var env = {
         url  : "",
         username : "",
         password  : ""
-    };`
+    };
+    ```
 5. On `main.js` file pass the varibles as per example below:
-    `let url = env.url;
+     ```
+    let url = env.url;
     let username = env.username;
-    let password = env.password;`
+    let password = env.password;
+    ```
 6.  Create `config_sample.js` file inside `js` folder and rename this file to `config.js` when running it locally in order to work sucessfully (Do not add this file to `.gitignore`)
 
 
