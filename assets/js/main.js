@@ -3,8 +3,7 @@ let username = "global/cloud@apiexamples.com";
 let password = "VMlRo/eh+Xd8M~l";
 
 //BTNS
-let searchBtn = document.getElementById("search_btn");
-let btnAddVoucher = document.getElementById("add_voucher");
+let btnSearch = document.getElementById("search_btn");
 let btnCreateVoucher = document.getElementById("create_voucher");
 
 //INPUTS
@@ -15,6 +14,8 @@ let branchId = document.getElementById("branch_id");
 
 let displayClients = document.getElementById("display_clients");
 let voucherForm = document.getElementById("voucher_form");
+let nameOnVoucher = document.getElementById("who");
+
 
 //ADD KeyboardEvent.code TO TRIGGER SEARCH BUTTON CLICK ON ENTER KEY
 searchInput.addEventListener("keyup", (e) => {
@@ -24,10 +25,10 @@ searchInput.addEventListener("keyup", (e) => {
 });
 
 //SEARCH BUTTON
-searchBtn.addEventListener ('click', () => {
+btnSearch.addEventListener ('click', () => {
     searchInputError.classList.add("d-none");
     let searchInputVal = searchInput.value;
-
+    
     //check if input is empty
     checkIfEmpty(searchInputVal, searchInputError);
 
@@ -45,17 +46,21 @@ searchBtn.addEventListener ('click', () => {
     }
 });
 
-//ADD VOUCHER BUTTON
-btnAddVoucher.addEventListener('click', () => {
+// ADD VOUCHER BUTTON
+let displayFormVoucher = (name, branch, client) => {
     let addVoucherError = document.getElementById("add_voucher_error");
-    if (branchId.value == "undefined") {
+    clientId.value = client;
+    branchId.value = branch;
+
+    if (branchId.value == "undefined" || branchId.value.length === 0) {
         addVoucherError.classList.remove("d-none");
         setTimeout(() => addVoucherError.classList.add("d-none"), 5000);
     }else{
+        nameOnVoucher.value = name;
         voucherForm.classList.remove("d-none");
-        scrollDown();
+        voucherForm.scrollIntoView();
     }
-});
+}
 
 //CREATE VOUCHER BUTTON
 btnCreateVoucher.addEventListener('click', () => {
@@ -80,7 +85,7 @@ btnCreateVoucher.addEventListener('click', () => {
     }
 });
 
-//CHECK IF INPUT IS BLANK
+//CHECK IF INPUT IS BLANk
 let checkIfEmpty = (text, el) => {
     if(text == "" || text == null ){
         el.classList.remove("d-none");
@@ -105,7 +110,7 @@ let messageSuccess = () => {
     let clientsContainer = document.getElementById("display_clients");
     let voucherContainer = document.getElementById("voucher_form");
     searchInput.disabled = true;
-    searchBtn.disabled = true;
+    btnSearch.disabled = true;
     messageSuccess.classList.remove("d-none");
     clientsContainer.remove();
     voucherContainer.remove();
@@ -115,35 +120,21 @@ let messageSuccess = () => {
 //GET LIST OF CLIENTS
 const populateClients = (resp) => {
     let arr = JSON.parse(resp);
-
+    let infoClients = [];
     if(arr._embedded === undefined){
         searchInputError.classList.remove("d-none");
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
     }else{
         displayClients.classList.remove("d-none");
-
         let clientsList = arr._embedded.clients;
-        clientsList.forEach(db => {
-            let clientFirstName = document.getElementById("first_name");
-            let clientLasttName = document.getElementById("last_name");
-            let clientPhoneNumber = document.getElementById("mobile");
-            let clientEmail = document.getElementById("email");
-            
-            if(typeof db.mobile === "undefined"){
-                document.getElementById("mobile").innerHTML = "N/A";
-            }else{
-                clientPhoneNumber.innerHTML = `${db.mobile}`; 
-            }
-
-            //DISPLAY THE DB IN THE HTML
-            clientId.value = `${db.clientId}`;
-            branchId.value = `${db.creatingBranchId}`;
-            clientFirstName.innerHTML = `${db.firstName}`;
-            clientLasttName.innerHTML = `${db.lastName}`;
-            clientEmail.innerHTML = `${db.email}`;
-        });
+        for (let i = 0; i < clientsList.length; i++) {
+            const db = clientsList[i];   
+            infoClients.push(`<tr><td>${db.firstName}</td><td>${db.lastName}</td><td>${(typeof db.mobile === "undefined") ? "N/A" : db.mobile}</td><td>${(db.email.length === 0|| !db.email.trim()) ? "N/A" : db.email}</td><td><button class="btn btn-custom text-uppercase" onclick="displayFormVoucher('${db.firstName}','${db.creatingBranchId}','${db.clientId}')">Add Voucher</button></td></tr>`);
+            document.getElementById("info_clients").innerHTML = infoClients.join("");
+        }
     }  
 };
+
 
 //SEND REQUEST //GET CLIENTS API
 let getAllData = (url) => {
@@ -178,14 +169,3 @@ let createVoucher = (data) => {
     };
     xhr.send(data);
 }
-
-//SCROLL TO THE bottom OF THE PAGE
-let scrollDown = (h) => {
-    let i = h || 0;
-    if (i < 250) {
-        setTimeout(() => {
-        window.scrollTo(0, i);
-        scrollDown(i + 220);
-        }, 1);
-    }
-};
