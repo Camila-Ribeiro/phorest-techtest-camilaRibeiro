@@ -6,13 +6,12 @@
   - [**For step 1**](#for-step-1)
   - [**For step 2**](#for-step-2)
   - [**Bonus Points**](#bonus-points)
-3. [**Connecting to our API**](#connecting-to-our-api)
-4. [**Technologies Used**](#technologies-used)
+3. [**Technologies Used**](#technologies-used)
     - [**Front-End Technologies**](#front-end-technologies)
     - [**Libraries/Framework Used**](#Libraries/-framework-used)
-5. [**Testing**](#testing)
+4. [**Testing**](#testing)
     - [**Automated Testing**](#automated-testing)
-6. [**Deployment**](#deployment)
+5. [**Deployment**](#deployment)
     - [**Local Deployment**](#local-deployment)
     - [**Remote Deployment**](#remote-deployment)
 
@@ -72,7 +71,7 @@ comfortable with them, but use the tools you best know and can work with.
 
 ### Libraries/ Framework Used
 - [Bootstrap 4](https://getbootstrap.com/) - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
-- [Moment](https://momentjs.com/) - Parse, validate, manipulate and display dates and times in JavaScript.
+- [Moment.js](https://momentjs.com/) - Parse, validate, manipulate and display dates and times in JavaScript.
 - [Jasmine](https://jasmine.github.io/) - Used for Test-Driven Development (TDD).
 - [Jasmine - jQuery](https://github.com/velesin/jasmine-jquery) - It provides two extensions for the Jasmine JavaScript Testing Framework
 
