@@ -26,18 +26,6 @@ describe("Phorest Web Application Test", () => {
 
     describe("The Search Button", () => {
 
-        beforeEach(() => {
-            $("#search_btn").click();
-            let searchInput = $("#search_btn").value;
-            let searchInputError = document.getElementById("search_input_error");
-            
-            if (searchInput == "" ||  searchInput == null) {
-                searchInputError.classList.add("d-none");
-                expect(searchInput).toHaveValue();
-                expect(searchInputError).toHaveClass("d-none");
-            } 
-        });
-
         it("should exist", () => {
             expect($("search_btn")).toBeDefined();
         }); 
@@ -49,6 +37,17 @@ describe("Phorest Web Application Test", () => {
             expect(spyEvent).toHaveBeenTriggered();
         });
      
+        it("should display message error when input is empty or null", () => {
+            $("#search_btn").click();
+            let searchInput = $("#search_btn").value;
+            let searchInputError = document.getElementById("search_input_error");
+            if (searchInput == "" ||  searchInput == null) {
+                searchInputError.classList.add("d-none");
+                expect(searchInput).toHaveValue();
+                expect(searchInputError).toHaveClass("d-none");
+            } 
+        });
+
         it("should return false when user have inserted an invalid email", () => {
             const invalidEmail = 'camila@';
             let resultEmail = validateEmail(invalidEmail);

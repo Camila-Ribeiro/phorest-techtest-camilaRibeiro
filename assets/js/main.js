@@ -1,6 +1,6 @@
-let url = `https://api-gateway-dev.phorest.com/third-party-api-server/api/business/eTC3QY5W3p_HmGHezKfxJw/client?`;
-let username = "global/cloud@apiexamples.com";
-let password = "VMlRo/eh+Xd8M~l";
+let url = env.url;
+let username = env.username;
+let password = env.password;
 
 //BTNS
 let btnSearch = document.getElementById("search_btn");
@@ -26,9 +26,10 @@ searchInput.addEventListener("keyup", (e) => {
 
 //SEARCH BUTTON
 btnSearch.addEventListener ('click', () => {
-    searchInputError.classList.add("d-none");
     let searchInputVal = searchInput.value;
     
+    resetForm();
+
     //check if input is empty
     checkIfEmpty(searchInputVal, searchInputError);
 
@@ -44,6 +45,7 @@ btnSearch.addEventListener ('click', () => {
         setTimeout(() => searchInputError.classList.add("d-none"), 4000);
         displayClients.classList.add("d-none");
     }
+
 });
 
 // ADD VOUCHER BUTTON
@@ -60,7 +62,7 @@ let displayFormVoucher = (name, branch, client) => {
         voucherForm.classList.remove("d-none");
         voucherForm.scrollIntoView();
     }
-}
+};
 
 //CREATE VOUCHER BUTTON
 btnCreateVoucher.addEventListener('click', () => {
@@ -85,6 +87,14 @@ btnCreateVoucher.addEventListener('click', () => {
     }
 });
 
+// RESET AND HIDE VOUCHE FORM ON SEACH
+let resetForm = () => {
+    if (!voucherForm.classList.contains("d-none")) {
+        voucherForm.classList.add("d-none");
+    }
+    voucherForm.reset();
+};
+
 //CHECK IF INPUT IS BLANk
 let checkIfEmpty = (text, el) => {
     if(text == "" || text == null ){
@@ -99,10 +109,10 @@ let checkIfEmpty = (text, el) => {
 let validateEmail = (email) => {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
-}
+};
 
 //VALIDATE PHONE NUMBER ON INPUT
-let validatePhone = (field) => (field.match(/^\d/)) ? true : false
+let validatePhone = (field) => (field.match(/^\d/)) ? true : false;
 
 //DISPLAY MESSAGE SUCCESS
 let messageSuccess = () => {
@@ -115,7 +125,7 @@ let messageSuccess = () => {
     clientsContainer.remove();
     voucherContainer.remove();
     setTimeout(() => location.reload(), 6000);
-}
+};
 
 //GET LIST OF CLIENTS
 const populateClients = (resp) => {
@@ -151,7 +161,7 @@ let getAllData = (url) => {
         alert("Woops, there was an error making the request."); 
     };
     xhr.send();
-}
+};
 
 //POST REQUEST //GET VOUCHER API
 let createVoucher = (data) => {
@@ -168,4 +178,4 @@ let createVoucher = (data) => {
         alert("Woops, there was an error making the request."); 
     };
     xhr.send(data);
-}
+};

@@ -14,6 +14,8 @@
 5. [**Deployment**](#deployment)
     - [**Local Deployment**](#local-deployment)
     - [**Remote Deployment**](#remote-deployment)
+6. [**Enviroment Variables**](#environment-variable)
+   
 
 ## Problem Description
 Phorest has a platform for our customers to build their own applications on.
@@ -85,7 +87,7 @@ Automated were conducted in this project test.
 ### Automated Testing
 I used [Jasmine 3.5.0](https://jasmine.github.io/) in conjunction with [jasmine-jquery 2.1.1](https://github.com/velesin/jasmine-jquery) to build all automated tests (test-driven development). These tests can be found in the [testing/automated(../blob/master/Testing.md) folder.
 
-There are **11** tests in my specs, all successfully passing, with **0** failures.
+There are **12** tests in my specs, all successfully passing, with **0** failures.
 
 ![Jasmine Spec Results](testing/automated/jasmine-test.png "Jasmine Spec Results")
 
@@ -103,6 +105,7 @@ There are **11** tests in my specs, all successfully passing, with **0** failure
 
 - should exist
 - should trigger click on Search button
+- should display message error when input is empty or null
 - should return false when user have inserted an invalid email
 - should return true when user have inserted an valid email
 - should validate phone number input as valid
@@ -110,7 +113,7 @@ There are **11** tests in my specs, all successfully passing, with **0** failure
 </details>
 
 <details>
-<summary><b>CLICK HERE</b>Add Voucher</b></summary>
+<summary><b>CLICK HERE</b> to see tests on Add Voucher</b></summary>
 
 - should exist
 - should display voucher form when click on Add Voucher button
@@ -118,7 +121,7 @@ There are **11** tests in my specs, all successfully passing, with **0** failure
 </details>
 
 <details>
-<summary><b>CLICK HERE</b>Create Voucher</b></summary>
+<summary><b>CLICK HERE</b> to see tests on Create Voucher</b></summary>
 
 - should exist
 - should trigger click on create voucher button
@@ -126,7 +129,7 @@ There are **11** tests in my specs, all successfully passing, with **0** failure
 </details>
 
 <details>
-<summary><b>CLICK HERE</b>Message Success</b></summary>
+<summary><b>CLICK HERE</b> to see tests on Message Success</b></summary>
 
 - should display message success when voucher is successfully created
 
@@ -182,3 +185,26 @@ Congratulations! Your project should be deployed successfully on GitHub Pages! :
 
 *** 
 
+
+## Environment Variables
+Steps to set up environmets:
+
+1. Create `config.js` file inside `js` folder,
+2. Add `<script src="assets/js/config.js"></script>` on index.html,
+3. Add `config.js` file to `.gitignore` file using path `assets/js/config.js`,
+4. On `config.js` file add desired variables as per example below:
+    `var env = {
+        url  : "",
+        username : "",
+        password  : ""
+    };`
+5. On `main.js` file pass the varibles as per example below:
+    `let url = env.url;
+    let username = env.username;
+    let password = env.password;`
+6.  Create `config_sample.js` file inside `js` folder and rename this file to `config.js` when running it locally in order to work sucessfully (Do not add this file to `.gitignore`)
+
+
+##### back to [top](#table-of-contents)
+
+*** 
