@@ -30,7 +30,7 @@ describe("Phorest Web Application Test", () => {
             expect($("search_btn")).toBeDefined();
         }); 
 
-        it("should trigger click on Search button", () => {
+        it("should trigger click on the Search button", () => {
             let spyEvent = spyOnEvent('#search_btn', 'click');
             $('#search_btn').click();
             expect('click').toHaveBeenTriggeredOn('#search_btn');
@@ -48,13 +48,13 @@ describe("Phorest Web Application Test", () => {
             } 
         });
 
-        it("should return false when user have inserted an invalid email", () => {
+        it("should return false when the user have inserted an invalid email", () => {
             const invalidEmail = 'camila@';
             let resultEmail = validateEmail(invalidEmail);
             expect(resultEmail).toEqual(false);
         });
 
-        it("should return true when user have inserted an valid email", () => {
+        it("should return true when user the have inserted a valid email", () => {
             const validEmail = 'camila@phorest.com';
             let resultEmail = validateEmail(validEmail);
             expect(resultEmail).toEqual(true);
@@ -88,7 +88,7 @@ describe("Phorest Web Application Test", () => {
             expect($("add_voucher")).toBeDefined();
         }); 
 
-        it("should display voucher form when click on Add Voucher button", () => {
+        it("should display voucher form when clicking on Add Voucher button", () => {
             $("#add_voucher").click();
             let voucherForm = $("#voucher_form");
             
@@ -156,7 +156,7 @@ describe("Phorest Web Application Test", () => {
             `);
         });
 
-        it("should display message success when voucher is successfully created", () => {
+        it("should display message success when the voucher is successfully created", () => {
             let messageSuccess = $("#message_success");
             let clientsContainer = $("#display_clients");
             let voucherContainer = $("#voucher_form");

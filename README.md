@@ -29,7 +29,7 @@ Our API documentation can be found [here](https://api-gateway-dev.phorest.com/th
 you have troubles making requests to the API.
 here
 
-We are looking for a web application, native app or command line interface - to our API.
+We are looking for a web application, native app or command-line interface - to our API.
 
 
 ## Acceptance Criteria
@@ -104,10 +104,10 @@ There are **12** tests in my specs, all successfully passing, with **0** failure
 <summary><b>CLICK HERE</b> to see tests on the <b>The Search Button</b></summary>
 
 - should exist
-- should trigger click on Search button
+- should trigger click on the Search button
 - should display message error when input is empty or null
-- should return false when user have inserted an invalid email
-- should return true when user have inserted an valid email
+- should return false when the user have inserted an invalid email
+- should return true when the user have inserted a valid email
 - should validate phone number input as valid
 - should validate phone number input as invalid
 </details>
@@ -116,7 +116,7 @@ There are **12** tests in my specs, all successfully passing, with **0** failure
 <summary><b>CLICK HERE</b> to see tests on Add Voucher</b></summary>
 
 - should exist
-- should display voucher form when click on Add Voucher button
+- should display voucher form when clicking on Add Voucher button
 
 </details>
 
@@ -131,7 +131,7 @@ There are **12** tests in my specs, all successfully passing, with **0** failure
 <details>
 <summary><b>CLICK HERE</b> to see tests on Message Success</b></summary>
 
-- should display message success when voucher is successfully created
+- should display message success when the voucher is successfully created
 
 </details>
 
@@ -152,7 +152,7 @@ To run this project locally on your own system, you will need to clone this repo
 Next, to proceed with local deployment, you can...
 
 - **Download** this GitHub repository
-    - by "*Code*" button above (beside green Gitpod button),
+    - by "*Code*" button above (besides green Gitpod button),
     - select *Download Zip*, this will download the project as a zip-file (*remember to unzip it first*).
 
 ### Remote Deployment
@@ -187,7 +187,7 @@ Congratulations! Your project should be deployed successfully on GitHub Pages! :
 
 
 ## Environment Variables
-Steps to set up environmets:
+Steps to set up environments:
 
 1. Create `config.js` file inside `js` folder,
 2. Add `<script src="assets/js/config.js"></script>` on index.html,
@@ -200,13 +200,13 @@ Steps to set up environmets:
         password  : ""
     };
     ```
-5. On `main.js` file pass the varibles as per example below:
+5. On `main.js` file pass the variables as per example below:
      ```
     let url = env.url;
     let username = env.username;
     let password = env.password;
     ```
-6.  Create `config_sample.js` file inside `js` folder and rename this file to `config.js` when running it locally in order to work sucessfully (Do not add this file to `.gitignore`)
+6.  Update `config_sample.js` file inside `js` folder and rename this file to `config.js` when running it locally in order to work successfully and also update the variable's values accordingly to call the API
 
 
 ##### back to [top](#table-of-contents)
