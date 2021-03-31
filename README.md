@@ -7,6 +7,14 @@
   - [**For step 2**](#for-step-2)
   - [**Bonus Points**](#bonus-points)
 3. [**Connecting to our API**](#connecting-to-our-api)
+4. [**Technologies Used**](#technologies-used)
+    - [**Front-End Technologies**](#front-end-technologies)
+    - [**Libraries/Framework Used**](#Libraries/-framework-used)
+5. [**Testing**](#testing)
+    - [**Automated Testing**](#automated-testing)
+6. [**Deployment**](#deployment)
+    - [**Local Deployment**](#local-deployment)
+    - [**Remote Deployment**](#remote-deployment)
 
 ## Problem Description
 Phorest has a platform for our customers to build their own applications on.
@@ -42,3 +50,136 @@ comfortable with them, but use the tools you best know and can work with.
 - Nice UI
 - Clean code
 - Deploy code / give instructions on how to set up environments
+
+##### back to [top](#table-of-contents)
+***
+
+
+## Technologies Used
+
+### Front-End Technologies
+<b>Built with</b>
+- ![HTML5](https://img.shields.io/static/v1?label=HTML&message=5&color=E34F26&logo=html5&logoColor=ffffff)
+    - [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) - Used as the base for markup text.
+- ![CSS3](https://img.shields.io/static/v1?label=CSS&message=3&color=1572B6&logo=css3&logoColor=ffffff)
+    - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3) - Used as the base for cascading styles.
+- ![JavaScript](https://img.shields.io/static/v1?label=JavaScript&message=ES6&color=F7DF1E&logo=javascript&logoColor=ffffff)
+    - [JavaScript ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript) - Used as the base for website interaction.
+- ![Jasmine](https://img.shields.io/static/v1?label=Jasmine&message=3.5.0&color=8A4182)
+    - [Jasmine](https://jasmine.github.io/) - Used for Test-Driven Development (TDD).
+- ![jasmine-jquery](https://img.shields.io/static/v1?label=jasmine-jquery&message=2.1.1&color=535B9F)
+    - [jasmine-jquery](https://www.npmjs.com/package/jasmine-jquery) - Used to simplify some of the automated Jasmine tests.
+
+### Libraries/ Framework Used
+- [Bootstrap 4](https://getbootstrap.com/) - Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development
+- [Moment](https://momentjs.com/) - Parse, validate, manipulate and display dates and times in JavaScript.
+- [Jasmine](https://jasmine.github.io/) - Used for Test-Driven Development (TDD).
+- [Jasmine - jQuery](https://github.com/velesin/jasmine-jquery) - It provides two extensions for the Jasmine JavaScript Testing Framework
+
+ 
+##### back to [top](#table-of-contents)
+***
+
+## Testing
+Automated were conducted in this project test. 
+
+### Automated Testing
+I used [Jasmine 3.5.0](https://jasmine.github.io/) in conjunction with [jasmine-jquery 2.1.1](https://github.com/velesin/jasmine-jquery) to build all automated tests (test-driven development). These tests can be found in the [testing/automated(../blob/master/Testing.md) folder.
+
+There are **11** tests in my specs, all successfully passing, with **0** failures.
+
+![Jasmine Spec Results](testing/automated/jasmine-test.png "Jasmine Spec Results")
+
+<details>
+<summary><b>CLICK HERE</b> to see tests on the <b>Phorest Web Application Test</b></summary>
+
+- describe: The Search Button
+- describe: Add Voucher
+- describe: Create Voucher
+- describe: Message Success
+
+</details>
+<details>
+<summary><b>CLICK HERE</b> to see tests on the <b>The Search Button</b></summary>
+
+- should exist
+- should trigger click on Search button
+- should return false when user have inserted an invalid email
+- should return true when user have inserted an valid email
+- should validate phone number input as valid
+- should validate phone number input as invalid
+</details>
+
+<details>
+<summary><b>CLICK HERE</b>Add Voucher</b></summary>
+
+- should exist
+- should display voucher form when click on Add Voucher button
+
+</details>
+
+<details>
+<summary><b>CLICK HERE</b>Create Voucher</b></summary>
+
+- should exist
+- should trigger click on create voucher button
+
+</details>
+
+<details>
+<summary><b>CLICK HERE</b>Message Success</b></summary>
+
+- should display message success when voucher is successfully created
+
+</details>
+
+##### back to [top](#table-of-contents)
+
+*** 
+## Deployment
+
+My [Phorest Tech Test](https://github.com/Camila-Ribeiro/phorest-techtest-camilaRibeiro) was developed locally using **VS Code**, and all commits were pushed to **GitHub** using **Git**.
+
+This website was deployed on GitHub pages built from the Master branch to publish the test.
+To run this project locally, download the files and navigate through the index.html to start.
+
+### Local Deployment
+
+To run this project locally on your own system, you will need to clone this repository and need to have [GIT](https://www.atlassian.com/git/tutorials/install-git) installed and any suitable IDE.
+
+Next, to proceed with local deployment, you can...
+
+- **Download** this GitHub repository
+    - by "*Code*" button above (beside green Gitpod button),
+    - select *Download Zip*, this will download the project as a zip-file (*remember to unzip it first*).
+
+### Remote Deployment
+
+This site was deployed using [GitHub Pages](https://pages.github.com/) using the **master branch**.
+
+Deployed Site:
+- [https://github.com/Camila-Ribeiro/phorest-techtest-camilaRibeiro](https://github.com/Camila-Ribeiro/phorest-techtest-camilaRibeiro)
+
+Once you have the project setup locally, you can proceed to deploy it remotely with the following steps:
+
+1. Navigate to your GitHub repository:
+    - `https://github.com/USERNAME/REPO`
+2. Click on the **Settings** tab at the top:
+    - `https://github.com/USERNAME/REPO/settings`
+3. Scroll down on that page to the **GitHub Pages** section.
+4. The first drop-down field should be **Source** with *None* preselected.
+5. Select **master branch** from the list.
+6. The page should refresh.
+7. Scroll back down to the **GitHub Pages** section.
+8. You should now have a deployed link:
+    - `https://USERNAME.github.io/REPO`
+
+**IMPORTANT NOTE**:
+- Please allow a few minutes to pass before opening your newly deployed link! Clicking this link too quickly may result in a failure to build the site, causing an Error 404 page instead.
+
+Congratulations! Your project should be deployed successfully on GitHub Pages! :tada: 
+
+##### back to [top](#table-of-contents)
+
+*** 
+

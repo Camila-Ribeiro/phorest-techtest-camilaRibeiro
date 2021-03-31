@@ -1,3 +1,11 @@
+let validateEmail = (email) => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
+let validatePhone = (searchInput) => (String(searchInput).match(/^\d/)) ? true : false
+let clientId = document.getElementById("client_id");
+let branchId = document.getElementById("branch_id");
+
 describe("Phorest Web Application Test", () => {
 
     beforeEach(() => {
@@ -30,37 +38,29 @@ describe("Phorest Web Application Test", () => {
             } 
         });
 
+        it("should exist", () => {
+            expect($("search_btn")).toBeDefined();
+        }); 
+
         it("should trigger click on Search button", () => {
             let spyEvent = spyOnEvent('#search_btn', 'click');
             $('#search_btn').click();
             expect('click').toHaveBeenTriggeredOn('#search_btn');
             expect(spyEvent).toHaveBeenTriggered();
         });
-
-        function validateEmail(email) {
-            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        it("should return false when user is called with an invalid email", () => {
+     
+        it("should return false when user have inserted an invalid email", () => {
             const invalidEmail = 'camila@';
             let resultEmail = validateEmail(invalidEmail);
             expect(resultEmail).toEqual(false);
         });
 
-        it("should return true when user is called with an valid email", () => {
+        it("should return true when user have inserted an valid email", () => {
             const validEmail = 'camila@phorest.com';
             let resultEmail = validateEmail(validEmail);
             expect(resultEmail).toEqual(true);
         });
 
-        function validatePhone(searchInput) {
-            if (String(searchInput).match(/^\d/)) {
-                return true;
-            }else{
-                return false;
-            } 
-        }
         it("should validate phone number input as valid", () => {
             const validPhoneNumber = 123456789;
             let validResultNumber = validatePhone(validPhoneNumber);
@@ -68,57 +68,54 @@ describe("Phorest Web Application Test", () => {
             
         });
 
-        it("should validate phone number input as invalid7", () => {
+        it("should validate phone number input as invalid", () => {
             const invalidPhoneNumber = "abcd";
             let invalidResultNumber = validatePhone(invalidPhoneNumber);
             expect(invalidResultNumber).toEqual(false);
-            
-        });
-
-        // it("should display list of clients", () => {
-        //     let displayClients = $("#display_clients");
-        //     expect(displayClients).toHaveClass("d-none");
-            
-        // });
-    });
-
-    describe("Trigger Button Click", () => {
-        it("should trigger a button click on enter key", () => {
-            $('#search_btn').triggerHandler('keyup');
         });
     });
 
     describe("Add Voucher", () => {
         beforeEach(() => {
             setFixtures(`
-            <td class="text-center">
-                <button class="btn btn-custom text-uppercase" id="add_voucher">Add Voucher</button>
-            </td>
+            <div id="add_voucher_error" class="w-75 mx-auto text-center alert alert-danger mt-5 d-none"><small>This voucher cannot be created!</small>
+            </div>
+            <input type="hidden" id="client_id" value="">
+            <input type="hidden" id="branch_id" value="">
             `);
-        });
-
-        it("should trigger click on Add Voucher button", () => {
-            let spyEvent = spyOnEvent('#add_voucher', 'click');
-            $('#add_voucher').click();
-            expect('click').toHaveBeenTriggeredOn('#add_voucher');
-            expect(spyEvent).toHaveBeenTriggered();
         });
 
         it("should exist", () => {
             expect($("add_voucher")).toBeDefined();
-        });
+        }); 
 
-        it("display the form", () => {
+        it("should display voucher form when click on Add Voucher button", () => {
             $("#add_voucher").click();
             let voucherForm = $("#voucher_form");
-            // let addVoucher = $("#add_voucher");
-            expect(voucherForm).not.toHaveClass("d-none");
-        });
             
+            let displayFormVoucher = (name, branch, client) => {
+                let addVoucherError = document.getElementById("add_voucher_error");
+                clientId.value = client;
+                branchId.value = branch;
+            
+                if (branchId.value == "undefined" || branchId.value.length === 0) {
+                    expect(addVoucherError).not.toHaveClass("d-none");
+                    setTimeout(function() {
+                        expect(addVoucherError).toHaveClass("d-none");
+                        done();
+                    }, 5000);
+                }else{
+                    nameOnVoucher.value = name;
+                    expect(voucherForm).not.toHaveClass("d-none");
+                    spyOn('voucherForm', 'scrollIntoView').and.callThrough();
+                    expect('voucherForm', 'scrollIntoView').toHaveBeenCalled();
+                }
+                expect(displayFormVoucher).not.toHaveClass("d-none");
+            }
+        });    
     });
     
     describe("Create Voucher", () => {
-        // let body;
 
         beforeEach(() => {
             setFixtures(`
@@ -137,44 +134,18 @@ describe("Phorest Web Application Test", () => {
                 <button type="button" class="btn btn-custom w-100 text-uppercase" id="create_voucher">Create Voucher</button>
             </div>
             `);
-         
-        });
-
-        it("should trigger click on Create Voucher button", () => {
-            let spyEvent = spyOnEvent('#create_voucher', 'click');
-            $('#create_voucher').click();
-            expect('click').toHaveBeenTriggeredOn('#create_voucher');
-            expect(spyEvent).toHaveBeenTriggered();
         });
 
         it("should exist", () => {
             expect($("create_voucher")).toBeDefined();
         });
-
-        // it("should matches objects with the expect key/value pairs", function() {
-         
-        //     let retrieveClientId = clientId.value;
-        //     let retrieveBranchId = branchId.value;
-        //     let getDecimalValue = parseFloat(voucherInput).toFixed(2);
-        //     let body = 
-        //     JSON.stringify({
-        //         clientId: retrieveClientId,
-        //         creatingBranchId: retrieveBranchId,
-        //         issueDate : moment(),
-        //         expiryDate : moment().add(1, 'years'),
-        //         originalBalance : getDecimalValue
-        //     });
-        //     expect(body).toEqual(jasmine.objectContaining({
-        //         clientId: retrieveClientId,
-        //         creatingBranchId: retrieveBranchId,
-        //         issueDate : moment(),
-        //         expiryDate : moment().add(1, 'years'),
-        //         originalBalance : getDecimalValue
-        //     }));
-            
-        //   });
-
         
+        it("should trigger click on create voucher button", () => {
+            let spyEvent = spyOnEvent('#create_voucher', 'click');
+            $('#create_voucher').click();
+            expect('click').toHaveBeenTriggeredOn('#create_voucher');
+            expect(spyEvent).toHaveBeenTriggered();
+        });
     });
 
     describe("Message Success", () => {
@@ -186,74 +157,15 @@ describe("Phorest Web Application Test", () => {
             `);
         });
 
-        it("should display message success", () => {
+        it("should display message success when voucher is successfully created", () => {
             let messageSuccess = $("#message_success");
             let clientsContainer = $("#display_clients");
             let voucherContainer = $("#voucher_form");
             expect(messageSuccess).not.toHaveClass("d-none");
-            // expect(clientsContainer).toBeHidden()
-            // expect(voucherContainer).remove();
+            expect(clientsContainer).not.toExist()
+            expect(voucherContainer).not.toExist()
         });
-    });
-
-    describe("Get List Of Clients", () => {
-        beforeEach(() => {
-            setFixtures(`
-            <div class="container-fluid">
-                <div class="clients-table d-none" id="display_clients">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Email</th>
-                            <th scope="col" class="th-voucher">Voucher</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td id="first_name"></td>
-                            <td id="last_name"></td>
-                            <td id="mobile"></td>
-                            <td id="email"></td>
-                            <td class="text-center">
-                                <button class="btn btn-custom text-uppercase" id="add_voucher">Add Voucher</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <input type="hidden" id="client_id" value="">
-                    <input type="hidden" id="branch_id" value="">
-                </div>
-            </div>
-            `);
-        });
-
-        it("should display client's list from database", () => {
-            
-            
-        });
-    });
-
-    describe("Get Clients API", () => {
-        beforeEach(() => {
-            
-        });
-
-        it("should send request", () => {
-           
-        });
-    });
-
-    describe("Get Voucher API", () => {
-        beforeEach(() => {
-            
-        });
-
-        it("should post request", () => {
-           
-        });
+        
     });
 
 }); //CLOSE FIRST DESCRIBE

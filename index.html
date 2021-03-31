@@ -42,16 +42,7 @@
                             <th scope="col" class="th-voucher">Voucher</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td id="first_name"></td>
-                            <td id="last_name"></td>
-                            <td id="mobile"></td>
-                            <td id="email"></td>
-                            <td class="text-center">
-                                <button class="btn btn-custom text-uppercase" id="add_voucher">Add Voucher</button>
-                            </td>
-                        </tr>
+                        <tbody id="info_clients">
                         </tbody>
                     </table>
                 </div>
@@ -69,7 +60,8 @@
                  </div>
                  <div class="voucher-body">
                     <div class="mobile-form form-group w-75">
-                        <label for="voucher_input"></label>
+                        <label class="mb-0" for="voucher_input">Amount for </label>
+                        <input type="text" readonly class="form-control-plaintext mt-0" id="who" value="">
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                             <span class="input-group-text">€</span>
