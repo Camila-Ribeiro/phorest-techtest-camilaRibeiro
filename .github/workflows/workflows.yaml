@@ -1,15 +1,5 @@
-on:
-push:
-    branches:
-    - master
-
-jobs:
-build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    env:
-      env.url: ${{ secrets.url }}
-      env.username: ${{ secrets.username }}
-      env.password: ${{ secrets.password }}
+steps:
+  env:
+    env.url: ${{ secrets.URL }}
+    env.username: ${{ secrets.USERNAME }}
+    env.password: ${{ secrets.PASSWORD }}
