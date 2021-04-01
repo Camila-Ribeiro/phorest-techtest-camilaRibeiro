@@ -50,11 +50,12 @@ btnSearch.addEventListener ('click', () => {
 
 // ADD VOUCHER BUTTON
 let displayFormVoucher = (name, branch, client) => {
+    
     let addVoucherError = document.getElementById("add_voucher_error");
     clientId.value = client;
     branchId.value = branch;
 
-    if (branchId.value == "undefined" || branchId.value.length === 0) {
+    if (branch == "undefined" || branch.length === 0) {
         addVoucherError.classList.remove("d-none");
         setTimeout(() => addVoucherError.classList.add("d-none"), 5000);
     }else{
@@ -129,6 +130,7 @@ let messageSuccess = () => {
 
 //GET LIST OF CLIENTS
 const populateClients = (resp) => {
+    
     let arr = JSON.parse(resp);
     let infoClients = [];
     if(arr._embedded === undefined){
