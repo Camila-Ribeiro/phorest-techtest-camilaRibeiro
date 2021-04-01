@@ -1,4 +1,4 @@
-on:
+on: push
 steps:
   env:
     BASE_BRANCH: master # The branch the action should deploy from.
