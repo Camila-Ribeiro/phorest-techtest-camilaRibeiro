@@ -13,7 +13,7 @@ build:
     - name: Deploy with github-pages
     uses: CamilaRiBeiro/github-pages-deploy-action@master
     env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.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 }}
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: target # The folder the action should deploy.
