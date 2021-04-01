@@ -1,9 +1,14 @@
 on: push
-steps:
+branches:
+  - master
+
+jobs:
+build:
+
   env:
-    BASE_BRANCH: master # The branch the action should deploy from.
-    BRANCH: gh-pages # The branch the action should deploy to.
-    FOLDER: target # The folder the action should deploy.
-    env.url: ${{ secrets.URL }}
-    env.username: ${{ secrets.USERNAME }}
-    env.password: ${{ secrets.PASSWORD }}
+      BASE_BRANCH: master # The branch the action should deploy from.
+      BRANCH: gh-pages # The branch the action should deploy to.
+      FOLDER: target # The folder the action should deploy.
+      env.url: ${{ secrets.URL }}
+      env.username: ${{ secrets.USERNAME }}
+      env.password: ${{ secrets.PASSWORD }}
