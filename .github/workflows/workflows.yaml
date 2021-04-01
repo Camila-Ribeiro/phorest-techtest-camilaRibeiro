@@ -8,9 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@master
       - name: Deploy with github-pages
       uses: Camila-Ribeiro/phorest-techtest-camilaRibeiro@master
       env:
-        env.url: ${{ secrets.URL }}
-        env.username: ${{ secrets.USERNAME }}
-        env.password: ${{ secrets.PASSWORD }}
+          env.url: ${{ secrets.URL }}
+          env.username: ${{ secrets.USERNAME }}
+          env.password: ${{ secrets.PASSWORD }}
