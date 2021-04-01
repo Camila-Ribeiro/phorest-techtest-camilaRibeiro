@@ -15,5 +15,5 @@ jobs:
       env.url: ${{ secrets.URL }}
       env.username: ${{ secrets.USERNAME }}
       env.password: ${{ secrets.PASSWORD }}
-    runs:
-      main: 'main.js'
+runs:
+  main: 'main.js'
